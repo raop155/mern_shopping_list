@@ -1,0 +1,10 @@
+import React from 'react';
+import { Container, ListGroup, ListGroupItem, Button } from 'reactstrap';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import uuid from 'uuid';
+
+const ShoppingList = () => {
+  return <div></div>;
+};
+
+export default ShoppingList;
