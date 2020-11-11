@@ -21,19 +21,6 @@ const ShoppingList = (props) => {
 
   return (
     <Container>
-      <Button
-        color='dark'
-        style={{ marginBottom: '2em' }}
-        onClick={() => {
-          const name = prompt('Enter Item');
-          if (name) {
-            // setItems([...items, { id: uuidv4(), name }]);
-          }
-        }}
-      >
-        Add item
-      </Button>
-
       <ListGroup>
         <TransitionGroup className='shopping-list'>
           {items.map(({ id, name }) => (

@@ -31,12 +31,12 @@ const itemReducer = (state = initialState, action) => {
     case ADD_ITEM:
       return {
         ...state,
+        items: [action.payload, ...state.items],
       };
     case DELETE_ITEM:
       return {
         ...state,
         items: state.items.filter((item) => {
-          console.log(item.id, '===', action.payload);
           return item.id !== action.payload;
         }),
       };

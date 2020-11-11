@@ -6,9 +6,10 @@ export const getItems = () => {
   };
 };
 
-export const addItem = () => {
+export const addItem = (item) => {
   return {
     type: ADD_ITEM,
+    payload: item,
   };
 };
 
