@@ -1,27 +1,24 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Container, ListGroup, ListGroupItem, Button } from 'reactstrap';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { v4 as uuidv4 } from 'uuid';
+import { connect } from 'react-redux';
+import { getItems, deleteItem } from '../actions/itemActions';
+import PropTypes from 'prop-types';
 
-const ShoppingList = () => {
-  const [items, setItems] = useState([
-    {
-      id: uuidv4(),
-      name: 'Item 1',
-    },
-    {
-      id: uuidv4(),
-      name: 'Item 2',
-    },
-    {
-      id: uuidv4(),
-      name: 'Item 3',
-    },
-    {
-      id: uuidv4(),
-      name: 'Item 4',
-    },
-  ]);
+const ShoppingList = (props) => {
+  // const [items, setItems] = useState(props.items.items);
+  const items = props.items;
+
+  useEffect(() => {
+    // props.getItems();
+  }, []);
+
+  const onDelete = (id) => {
+    console.log('id', id);
+    props.deleteItem(id);
+  };
+
   return (
     <Container>
       <Button
@@ -30,7 +27,7 @@ const ShoppingList = () => {
         onClick={() => {
           const name = prompt('Enter Item');
           if (name) {
-            setItems([...items, { id: uuidv4(), name }]);
+            // setItems([...items, { id: uuidv4(), name }]);
           }
         }}
       >
@@ -46,13 +43,7 @@ const ShoppingList = () => {
                   className='remove-btn'
                   color='danger'
                   size='sm'
-                  onClick={() => {
-                    setItems(
-                      items.filter((item) => {
-                        return item.id !== id;
-                      }),
-                    );
-                  }}
+                  onClick={() => onDelete(id)}
                 >
                   &times;
                 </Button>
@@ -66,4 +57,20 @@ const ShoppingList = () => {
   );
 };
 
-export default ShoppingList;
+ShoppingList.propTypes = {
+  getItems: PropTypes.func.isRequired,
+  items: PropTypes.array.isRequired,
+};
+
+const mapStateToProps = (state) => {
+  return {
+    items: state.item.items,
+  };
+};
+
+const mapDispatchToProps = {
+  getItems,
+  deleteItem: (id) => deleteItem(id),
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ShoppingList);
