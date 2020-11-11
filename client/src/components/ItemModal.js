@@ -29,7 +29,6 @@ const ItemModal = (props) => {
     e.preventDefault();
 
     const newItem = {
-      id: Math.random(),
       name,
     };
 

@@ -8,29 +8,34 @@ import PropTypes from 'prop-types';
 
 const ShoppingList = (props) => {
   // const [items, setItems] = useState(props.items.items);
-  const items = props.items;
+  const { items, getItems, deleteItem } = props;
 
   useEffect(() => {
-    // props.getItems();
-  }, []);
+    getItems();
+  }, [getItems]);
+
+  useEffect(() => {
+    console.log(typeof items);
+    // console.log(typeof items[0]._id);
+    console.log(items[0]);
+  }, [items]);
 
   const onDelete = (id) => {
-    console.log('id', id);
-    props.deleteItem(id);
+    deleteItem(id);
   };
 
   return (
     <Container>
       <ListGroup>
         <TransitionGroup className='shopping-list'>
-          {items.map(({ id, name }) => (
-            <CSSTransition key={id} timeout={250} classNames='fade'>
+          {items.map(({ _id, name }) => (
+            <CSSTransition key={_id} timeout={250} classNames='fade'>
               <ListGroupItem>
                 <Button
                   className='remove-btn'
                   color='danger'
                   size='sm'
-                  onClick={() => onDelete(id)}
+                  onClick={() => onDelete(_id)}
                 >
                   &times;
                 </Button>

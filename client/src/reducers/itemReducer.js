@@ -1,25 +1,9 @@
 import { v4 as uuidv4 } from 'uuid';
-import { GET_ITEMS, ADD_ITEM, DELETE_ITEM } from '../actions/types';
+import { GET_ITEMS, ADD_ITEM, DELETE_ITEM, ITEMS_LOADING } from '../actions/types';
 
 const initialState = {
-  items: [
-    {
-      id: uuidv4(),
-      name: 'Redux 1',
-    },
-    {
-      id: uuidv4(),
-      name: 'Redux 2',
-    },
-    {
-      id: uuidv4(),
-      name: 'Redux 3',
-    },
-    {
-      id: uuidv4(),
-      name: 'Redux 4',
-    },
-  ],
+  items: [],
+  loading: false,
 };
 
 const itemReducer = (state = initialState, action) => {
@@ -27,6 +11,8 @@ const itemReducer = (state = initialState, action) => {
     case GET_ITEMS:
       return {
         ...state,
+        items: action.payload,
+        loading: false,
       };
     case ADD_ITEM:
       return {
@@ -37,10 +23,14 @@ const itemReducer = (state = initialState, action) => {
       return {
         ...state,
         items: state.items.filter((item) => {
-          return item.id !== action.payload;
+          return item._id !== action.payload;
         }),
       };
-
+    case ITEMS_LOADING:
+      return {
+        ...state,
+        loading: true,
+      };
     default:
       return state;
   }
