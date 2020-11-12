@@ -2,15 +2,15 @@ const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
 const items = require('./routes/api/items');
-// const { AwakeHeroku } = require('awake-heroku');
+const { AwakeHeroku } = require('awake-heroku');
 
-// AwakeHeroku.add({
-//   url: 'https://shopping-list-mern-production.herokuapp.com',
-// });
+AwakeHeroku.add({
+  url: 'https://shopping-list-mern-production.herokuapp.com',
+});
 
-// AwakeHeroku.add({
-//   url: 'https://bugdet-app.herokuapp.com',
-// });
+AwakeHeroku.add({
+  url: 'https://bugdet-app.herokuapp.com',
+});
 
 const app = express();
 
