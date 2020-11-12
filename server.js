@@ -8,10 +8,6 @@ AwakeHeroku.add({
   url: 'https://shopping-list-mern-production.herokuapp.com',
 });
 
-AwakeHeroku.add({
-  url: 'https://bugdet-app.herokuapp.com',
-});
-
 const app = express();
 
 // Body parser
