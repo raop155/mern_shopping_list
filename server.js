@@ -3,14 +3,16 @@ const mongoose = require('mongoose');
 const path = require('path');
 const items = require('./routes/api/items');
 const users = require('./routes/api/users');
+const auth = require('./routes/api/auth');
 const app = express();
+const config = require('config');
 
 // Body parser
 app.use(express.json());
 
 // DB Config
 
-const db = require('./config/key').mongoURI;
+const db = config.get('mongoURI');
 
 // Connect to Mongo
 mongoose
@@ -28,6 +30,7 @@ mongoose
 // Use Routes
 app.use('/api/items', items);
 app.use('/api/users', users);
+app.use('/api/auth', auth);
 
 // Server static assets if in production
 if (process.env.NODE_ENV === 'production') {

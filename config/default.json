@@ -1,0 +1,4 @@
+{
+  "mongoURI": "mongodb+srv://raop:raopdb@development.dphsj.mongodb.net/shoppinglist?retryWrites=true&w=majority",
+  "jwtSecret": "sl_my_JwtSecret"
+}
