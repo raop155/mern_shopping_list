@@ -2,12 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
 const items = require('./routes/api/items');
-// const { AwakeHeroku } = require('awake-heroku');
-
-// AwakeHeroku.add({
-//   url: 'https://shopping-list-mern-production.herokuapp.com',
-// });
-
+const users = require('./routes/api/users');
 const app = express();
 
 // Body parser
@@ -19,7 +14,12 @@ const db = require('./config/key').mongoURI;
 
 // Connect to Mongo
 mongoose
-  .connect(db, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false })
+  .connect(db, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false,
+    useCreateIndex: true,
+  })
   .then(() => {
     console.log('MongoDB Connected...');
   })
@@ -27,6 +27,7 @@ mongoose
 
 // Use Routes
 app.use('/api/items', items);
+app.use('/api/users', users);
 
 // Server static assets if in production
 if (process.env.NODE_ENV === 'production') {
