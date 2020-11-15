@@ -13,7 +13,6 @@ import {
 } from './types';
 
 // Check token & load user
-
 export const loadUser = () => (dispatch, getState) => {
   dispatch({
     type: USER_LOADING,
@@ -35,8 +34,43 @@ export const loadUser = () => (dispatch, getState) => {
     });
 };
 
-// Setup config/headers and token
+// Register User
+export const register = ({ name, email, password }) => (dispatch) => {
+  // Headers
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
 
+  // Request body
+  const body = JSON.stringify({ name, email, password });
+  // console.log('body', body);
+
+  axios
+    .post('/api/users', body, config)
+    .then((res) =>
+      dispatch({
+        type: REGISTER_SUCCESS,
+        payload: res.data,
+      }),
+    )
+    .catch((err) => {
+      dispatch(returnErrors(err.response.data, err.response.status, REGISTER_FAIL));
+      dispatch({
+        type: REGISTER_FAIL,
+      });
+    });
+};
+
+// Logout User
+export const logout = () => {
+  return {
+    type: LOGOUT_SUCCESS,
+  };
+};
+
+// Setup config/headers and token
 export const tokenConfig = (getState) => {
   // Get token from localStorage
   const token = getState().auth.token;
@@ -53,5 +87,6 @@ export const tokenConfig = (getState) => {
     config.headers['x-auth-token'] = token;
   }
 
+  console.log('config token', config);
   return config;
 };

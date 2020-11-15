@@ -14,9 +14,9 @@ const ShoppingList = (props) => {
   }, [getItems]);
 
   useEffect(() => {
-    console.log(typeof items);
+    // console.log(typeof items);
     // console.log(typeof items[0]._id);
-    console.log(items[0]);
+    // console.log(items[0]);
   }, [items]);
 
   const onDelete = (id) => {

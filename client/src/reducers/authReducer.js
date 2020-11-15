@@ -9,6 +9,8 @@ import {
   REGISTER_FAIL,
 } from '../actions/types';
 
+// localStorage.setItem('token', 'action.payload.token');
+
 const initialState = {
   token: localStorage.getItem('token'),
   isAuth: false,
@@ -33,6 +35,7 @@ const authReducer = (state = initialState, action) => {
 
     case LOGIN_SUCCESS:
     case REGISTER_SUCCESS:
+      localStorage.setItem('token', action.payload.user.token);
       return {
         ...state,
         ...action.payload,
