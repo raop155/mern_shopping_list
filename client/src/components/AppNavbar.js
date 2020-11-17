@@ -24,6 +24,30 @@ const AppNavbar = (props) => {
 
   const { isAuth, user } = props.auth;
 
+  const authLinks = (
+    <>
+      <NavItem>
+        <span className='navbar-text mr-3'>
+          <strong>{user ? `Welcome ${user.name}` : ''}</strong>
+        </span>
+      </NavItem>
+      <NavItem>
+        <Logout />
+      </NavItem>
+    </>
+  );
+
+  const guestLinks = (
+    <>
+      <NavItem>
+        <RegisterModal />
+      </NavItem>
+      <NavItem>
+        <LoginModal />
+      </NavItem>
+    </>
+  );
+
   return (
     <div>
       <Navbar color='dark' dark expand='sm' className='mb-5'>
@@ -32,15 +56,7 @@ const AppNavbar = (props) => {
           <NavbarToggler onClick={toggle} />
           <Collapse isOpen={isOpen} navbar>
             <Nav className='ml-auto' navbar>
-              <NavItem>
-                <RegisterModal />
-              </NavItem>
-              <NavItem>
-                <LoginModal />
-              </NavItem>
-              <NavItem>
-                <Logout />
-              </NavItem>
+              {isAuth ? authLinks : guestLinks}
             </Nav>
           </Collapse>
         </Container>
