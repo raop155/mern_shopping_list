@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   Collapse,
   Navbar,
@@ -48,6 +48,10 @@ const AppNavbar = (props) => {
     </>
   );
 
+  useEffect(() => {
+    console.log('USER', user);
+  }, [user]);
+
   return (
     <div>
       <Navbar color='dark' dark expand='sm' className='mb-5'>
@@ -56,7 +60,27 @@ const AppNavbar = (props) => {
           <NavbarToggler onClick={toggle} />
           <Collapse isOpen={isOpen} navbar>
             <Nav className='ml-auto' navbar>
-              {isAuth ? authLinks : guestLinks}
+              {isAuth ? (
+                <>
+                  <NavItem>
+                    <span className='navbar-text mr-3'>
+                      <strong>{user ? `Welcome ${user.name}` : ''}</strong>
+                    </span>
+                  </NavItem>
+                  <NavItem>
+                    <Logout />
+                  </NavItem>
+                </>
+              ) : (
+                <>
+                  <NavItem>
+                    <RegisterModal />
+                  </NavItem>
+                  <NavItem>
+                    <LoginModal />
+                  </NavItem>
+                </>
+              )}
             </Nav>
           </Collapse>
         </Container>
@@ -66,7 +90,7 @@ const AppNavbar = (props) => {
 };
 
 AppNavbar.propTypes = {
-  auth: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({

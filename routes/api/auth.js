@@ -61,7 +61,11 @@ router.get('/user', auth, (req, res) => {
     .then((user) =>
       res.json({
         status: 'success',
-        user,
+        user: {
+          id: user.id,
+          name: user.name,
+          email: user.email,
+        },
       }),
     );
 });
