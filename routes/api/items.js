@@ -18,11 +18,17 @@ router.get('/', (req, res) => {
 // @desc    Create an Item
 // @access  Private
 router.post('/', auth, (req, res) => {
+  // router.post('/', (req, res) => {
+  // console.log('req.body', req.body);
+  // console.log('req.body.name', req.body.name);
   const newItem = new Item({
     name: req.body.name,
   });
 
-  newItem.save().then((item) => res.json(item));
+  newItem
+    .save()
+    .then((item) => res.json(item))
+    .catch((err) => console.log(err));
 });
 
 // @route   UPDATE api/items/:id

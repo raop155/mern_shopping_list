@@ -32,6 +32,7 @@ const ItemModal = (props) => {
       name,
     };
 
+    console.log('newItem', newItem);
     props.addItem(newItem);
 
     toggle();

@@ -9,8 +9,6 @@ import {
   REGISTER_FAIL,
 } from '../actions/types';
 
-// localStorage.setItem('token', 'action.payload.token');
-
 const initialState = {
   token: localStorage.getItem('token'),
   isAuth: false,
@@ -41,6 +39,7 @@ const authReducer = (state = initialState, action) => {
         ...action.payload,
         isAuth: true,
         isLoading: false,
+        token: action.payload.user.token,
       };
 
     case AUTH_ERROR:

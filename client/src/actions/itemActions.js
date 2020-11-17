@@ -17,6 +17,7 @@ export const getItems = () => (dispatch) => {
 };
 
 export const addItem = (item) => (dispatch, getState) => {
+  console.log('item', item);
   axios
     .post('/api/items', item, tokenConfig(getState))
     .then((res) =>
