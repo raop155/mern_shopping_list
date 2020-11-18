@@ -7,17 +7,11 @@ import PropTypes from 'prop-types';
 
 const ShoppingList = (props) => {
   // const [items, setItems] = useState(props.items.items);
-  const { items, getItems, deleteItem } = props;
+  const { isAuth, items, getItems, deleteItem } = props;
 
   useEffect(() => {
     getItems();
   }, [getItems]);
-
-  useEffect(() => {
-    // console.log(typeof items);
-    // console.log(typeof items[0]._id);
-    // console.log(items[0]);
-  }, [items]);
 
   const onDelete = (id) => {
     deleteItem(id);
@@ -30,14 +24,17 @@ const ShoppingList = (props) => {
           {items.map(({ _id, name }) => (
             <CSSTransition key={_id} timeout={250} classNames='fade'>
               <ListGroupItem>
-                <Button
-                  className='remove-btn'
-                  color='danger'
-                  size='sm'
-                  onClick={() => onDelete(_id)}
-                >
-                  &times;
-                </Button>
+                {isAuth && (
+                  <Button
+                    className='remove-btn'
+                    color='danger'
+                    size='sm'
+                    onClick={() => onDelete(_id)}
+                  >
+                    &times;
+                  </Button>
+                )}
+
                 {name}
               </ListGroupItem>
             </CSSTransition>
@@ -49,12 +46,14 @@ const ShoppingList = (props) => {
 };
 
 ShoppingList.propTypes = {
-  getItems: PropTypes.func.isRequired,
+  isAuth: PropTypes.bool.isRequired,
   items: PropTypes.array.isRequired,
+  getItems: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {
   return {
+    isAuth: state.auth.isAuth,
     items: state.item.items,
   };
 };
