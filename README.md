@@ -59,3 +59,7 @@ Enjoy :)
 
 * [React.js](https://reactjs.org/)
 * [React Strap](https://reactstrap.github.io/)
+* [JWT](https://jwt.io/)
+* [Bcrypt](https://github.com/kelektiv/node.bcrypt.js)
+* [Heroku](https://heroku.com/)
+
